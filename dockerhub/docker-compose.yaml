@@ -1,0 +1,12 @@
+version: "3"
+services:
+  dockerhub:
+    image: "registry:2.8.1"
+    container_name: "dockerhub"
+    restart: "always"
+    volumes:
+      - "/etc/localtime:/etc/localtime"
+      - "./data:/var/lib/registry"
+      - "./config.yml:/etc/docker/registry/config.yml"
+    ports:
+      - "5000:5000"

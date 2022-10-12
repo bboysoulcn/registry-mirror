@@ -1,0 +1,12 @@
+version: "3"
+services:
+  registryk8s:
+    image: "registry:2.8.1"
+    container_name: "registryk8s"
+    restart: "always"
+    volumes:
+      - "/etc/localtime:/etc/localtime"
+      - "./data:/var/lib/registry"
+      - "./config.yml:/etc/docker/registry/config.yml"
+    ports:
+      - "5005:5000"
