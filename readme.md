@@ -1,6 +1,15 @@
-registryk8s.bboysoul.cn
-quay.bboysoul.cn
-k8sgcr.bboysoul.cn
-ghcr.bboysoul.cn
-gcr.bboysoul.cn
-hub.bboysoul.cn
+### 简介
+
+这是为了方便大家做各个镜像仓库代理的
+
+### 操作
+
+你想要代理哪一个仓库就直接进入哪一个文件夹
+
+`docker-compose up -d`
+
+就好了
+
+每一个镜像仓库对外的端口都是不一样的，当然你也可以使用nginx统一反向代理一下
+
+喜欢的给个star哦！！！！
