@@ -18,6 +18,34 @@
 
 每一个镜像仓库对外的端口都是不一样的，当然你也可以使用nginx统一反向代理一下
 
+#### 当你反代并开启HTTPS后，不用设置环境也可以直接使用，用法示例：
+```
+docker pull example.com/library/mysql:5.7
+```
+说明：`library`是一个特殊的命名空间，它代表的是官方镜像。如果是某个用户的镜像就把`library`替换为镜像的用户名。
+
+#### 环境配置教程
+
+此方法会重启Docker服务，当您有容器正在运行时，建议使用上面的方法
+```
+sudo vim /etc/docker/daemon.json
+```
+```
+{
+"registry-mirrors": [
+"http://ip:5000"
+]
+}
+```
+```
+sudo systemctl daemon-reload
+```
+```
+sudo systemctl restart docker
+```
+
+查看配置`docker info`
+
 ### 注意
 
 大家可以看下配置文件
@@ -26,6 +54,4 @@
 
 喜欢的给个star哦！！！！
 
-### 广告位
 
-我的tg频道 [https://t.me/bboyapp](https://t.me/bboyapp)
