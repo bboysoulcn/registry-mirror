@@ -19,3 +19,7 @@
 默认168h小时之后会清理缓存，也就是你拉取的镜像缓存
 
 喜欢的给个star哦！！！！
+
+### 广告位
+
+我的tg频道 [https://t.me/bboyapp](https://t.me/bboyapp)
