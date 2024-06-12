@@ -20,12 +20,22 @@
 
 #### 配置教程
 ```
+sudo vim /etc/docker/daemon.json
+```
+```
 {
 "registry-mirrors": [
 "http://ip:5000"
 ]
 }
 ```
+```
+sudo systemctl daemon-reload
+```
+```
+sudo systemctl restart docker
+```
+
 
 ### 注意
 
