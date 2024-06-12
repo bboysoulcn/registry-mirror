@@ -1,0 +1,56 @@
+version: "3"
+services:
+  k8sgcr:
+    image: "registry:2.8.3"
+    container_name: "k8sgcr"
+    restart: "always"
+    volumes:
+      - "/etc/localtime:/etc/localtime"
+      - "./k8sgcr/data:/var/lib/registry"
+      - "./k8sgcr/config.yml:/etc/docker/registry/config.yml"
+    ports:
+      - "5004:5000"
+
+  ghcr:
+    image: "registry:2.8.3"
+    container_name: "ghcr"
+    restart: "always"
+    volumes:
+      - "/etc/localtime:/etc/localtime"
+      - "./ghcr/data:/var/lib/registry"
+      - "./ghcr/config.yml:/etc/docker/registry/config.yml"
+    ports:
+      - "5001:5000"
+
+  gcr:
+    image: "registry:2.8.3"
+    container_name: "gcr"
+    restart: "always"
+    volumes:
+      - "/etc/localtime:/etc/localtime"
+      - "./gcr/data:/var/lib/registry"
+      - "./gcr/config.yml:/etc/docker/registry/config.yml"
+    ports:
+      - "5003:5000"
+
+  dockerhub:
+    image: "registry:2.8.3"
+    container_name: "dockerhub"
+    restart: "always"
+    volumes:
+      - "/etc/localtime:/etc/localtime"
+      - "./dockerhub/data:/var/lib/registry"
+      - "./dockerhub/config.yml:/etc/docker/registry/config.yml"
+    ports:
+      - "5000:5000"
+
+  registryk8s:
+    image: "registry:2.8.3"
+    container_name: "registryk8s"
+    restart: "always"
+    volumes:
+      - "/etc/localtime:/etc/localtime"
+      - "./registryk8s/data:/var/lib/registry"
+      - "./registryk8s/config.yml:/etc/docker/registry/config.yml"
+    ports:
+      - "5005:5000"

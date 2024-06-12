@@ -4,7 +4,13 @@
 
 ### 操作
 
-你想要代理哪一个仓库就直接进入哪一个文件夹
+如果你想要启动所有的镜像仓库直接执行 
+
+`docker-compose up -d`
+
+但是你想要单独代理某一个仓库就直接进入那个文件夹
+
+`cd dockerhub`
 
 `docker-compose up -d`
 
