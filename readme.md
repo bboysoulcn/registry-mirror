@@ -36,6 +36,7 @@ sudo systemctl daemon-reload
 sudo systemctl restart docker
 ```
 
+查看配置`docker info`
 
 ### 注意
 
