@@ -1,0 +1,10 @@
+resources:
+- sts.yaml
+- svc.yaml
+
+configMapGenerator:
+- name: k8sgcr-cnf
+  files:
+  - config.yml
+  options:
+    disableNameSuffixHash: true

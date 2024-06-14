@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: dockerhub
+  namespace: registry
+spec:
+  selector:
+    matchLabels:
+      app: dockerhub
+  serviceName: dockerhub
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: dockerhub
+    spec:
+      containers:
+      - name: dockerhub
+        image: registry:2.8.1
+        ports:
+        - containerPort: 5000
+          name: dockerhub
+        volumeMounts:
+        - name: dockerhub-data
+          mountPath: /var/lib/registry
+        - name: timezone
+          mountPath: /etc/localtime
+          readOnly: true
+        - name: dockerhub-cnf
+          mountPath: /etc/docker/registry/config.yml
+          subPath: config.yml
+      volumes:
+        - name: dockerhub-cnf
+          configMap:
+            name: dockerhub-cnf
+        - name: timezone
+          hostPath: 
+            path: /usr/share/zoneinfo/Asia/Shanghai  
+  volumeClaimTemplates:
+  - metadata:
+      name: dockerhub-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 50Gi

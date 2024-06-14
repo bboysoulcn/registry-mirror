@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: registryk8s
+  namespace: registry
+spec:
+  selector:
+    matchLabels:
+      app: registryk8s
+  serviceName: registryk8s
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: registryk8s
+    spec:
+      containers:
+      - name: registryk8s
+        image: registry:2.8.1
+        ports:
+        - containerPort: 5000
+          name: registryk8s
+        volumeMounts:
+        - name: registryk8s-data
+          mountPath: /var/lib/registry
+        - name: timezone
+          mountPath: /etc/localtime
+          readOnly: true
+        - name: registryk8s-cnf
+          mountPath: /etc/docker/registry/config.yml
+          subPath: config.yml
+      volumes:
+        - name: registryk8s-cnf
+          configMap:
+            name: registryk8s-cnf
+        - name: timezone
+          hostPath: 
+            path: /usr/share/zoneinfo/Asia/Shanghai  
+  volumeClaimTemplates:
+  - metadata:
+      name: registryk8s-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 50Gi

@@ -1,0 +1,14 @@
+resources:
+- registryk8s
+- quay
+- dockerhub
+- gcr
+- ghcr
+- k8sgcr
+- ingress.yaml
+
+namespace: registry
+
+images:
+- name: registry
+  newTag: 2.8.3

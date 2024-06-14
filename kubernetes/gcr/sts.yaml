@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: gcr
+  namespace: registry
+spec:
+  selector:
+    matchLabels:
+      app: gcr
+  serviceName: gcr
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: gcr
+    spec:
+      containers:
+      - name: gcr
+        image: registry:2.8.1
+        ports:
+        - containerPort: 5000
+          name: gcr
+        volumeMounts:
+        - name: gcr-data
+          mountPath: /var/lib/registry
+        - name: timezone
+          mountPath: /etc/localtime
+          readOnly: true
+        - name: gcr-cnf
+          mountPath: /etc/docker/registry/config.yml
+          subPath: config.yml
+      volumes:
+        - name: gcr-cnf
+          configMap:
+            name: gcr-cnf
+        - name: timezone
+          hostPath: 
+            path: /usr/share/zoneinfo/Asia/Shanghai  
+  volumeClaimTemplates:
+  - metadata:
+      name: gcr-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 50Gi

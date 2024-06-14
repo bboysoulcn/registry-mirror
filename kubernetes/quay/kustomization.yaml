@@ -1,0 +1,10 @@
+resources:
+- sts.yaml
+- svc.yaml
+
+configMapGenerator:
+- name: quay-cnf
+  files:
+  - config.yml
+  options:
+    disableNameSuffixHash: true

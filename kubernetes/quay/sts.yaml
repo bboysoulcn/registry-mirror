@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: quay
+  namespace: registry
+spec:
+  selector:
+    matchLabels:
+      app: quay
+  serviceName: quay
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: quay
+    spec:
+      containers:
+      - name: quay
+        image: registry:2.8.1
+        ports:
+        - containerPort: 5000
+          name: quay
+        volumeMounts:
+        - name: quay-data
+          mountPath: /var/lib/registry
+        - name: timezone
+          mountPath: /etc/localtime
+          readOnly: true
+        - name: quay-cnf
+          mountPath: /etc/docker/registry/config.yml
+          subPath: config.yml
+      volumes:
+        - name: quay-cnf
+          configMap:
+            name: quay-cnf
+        - name: timezone
+          hostPath: 
+            path: /usr/share/zoneinfo/Asia/Shanghai  
+  volumeClaimTemplates:
+  - metadata:
+      name: quay-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 50Gi
