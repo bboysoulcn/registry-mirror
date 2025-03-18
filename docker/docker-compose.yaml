@@ -54,3 +54,16 @@ services:
       - "./registryk8s/config.yml:/etc/docker/registry/config.yml"
     ports:
       - "5005:5000"
+
+  # nginx-proxy-manager:
+  #   image: 'jc21/nginx-proxy-manager:2.11.3'
+  #   container_name: nginx-proxy-manager
+  #   restart: always
+  #   ports:
+  #     - '80:80'
+  #     - '82:81'
+  #     - '443:443'
+  #   volumes:
+  #     - "/etc/localtime:/etc/localtime"
+  #     - ./npm/data:/data
+  #     - ./npm/letsencrypt:/etc/letsencrypt
